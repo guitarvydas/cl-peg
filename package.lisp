@@ -3,7 +3,8 @@
   (:export
    #:into-package
    #:rules
-   #:parser))
+   #:parser
+   #:peg-package))
 
 (defpackage :PEG-GRAMMAR
   (:use :cl)
@@ -11,6 +12,6 @@
   (:export
    #:peg))
 
-(defpackage :new-grammar
+(defpackage :test-grammar
   (:use :cl))
 

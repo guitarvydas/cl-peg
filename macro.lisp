@@ -1,14 +1,23 @@
 (in-package :peg)
 
-(defmacro into-package (pkg)
-  ;; tbd
-  (declare (ignore pkg))
-  nil)
+(defparameter *peg-package* "TEST-GRAMMAR")
+
+(defmacro into-package (id)
+  `(cond ((stringp ,id)
+          (setf *peg-package* (find-package ,id)))
+         ((keywordp ,id)
+          (setf *peg-package* (find-package (symbol-name ,id))))
+         ((packagep ,id)
+          (setf *peg-package* ,id))
+         (t
+          (error "bad argument for peg:into-package, need string/keyword/package"))))
+
+(defun peg-package () *peg-package*)
 
 (defmacro rules (id rulestr &body body)
   "parse the rule to be added using the PEG grammar"
   ;; this results in an esrap sexpr that creates the new rule 
-  ;; in the package :new-grammar
+  ;; in the package *peg-package*
   (let ((esrap-syntax (esrap:parse 'peg-grammar:peg rulestr)))
     `(esrap:defrule ,id ,esrap-syntax ,@body)))
 ;      `(esrap:defrule ,id ,esrap-syntax ,@body))))

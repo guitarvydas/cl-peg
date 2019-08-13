@@ -1,41 +1,41 @@
-(peg:into-package :grammar-test)
+(peg:into-package "TEST-GRAMMAR")
 
 (peg:rules
-    new-grammar::Top 
+    test-grammar::Top 
   "Three-x Abc Three-y"
   (:destructure (a b c)
    (format *standard-output* "found Top ~S ~S ~S~%" a b c)))
 
 (peg:rules
-    new-grammar::Abc
+    test-grammar::Abc
     "'abc'"
     (:lambda (s)
      (format *standard-output* "found Abc~%")
      s))
 
 (peg:rules
-    new-grammar::Three-x
+    test-grammar::Three-x
     "X X X"
     (:destructure (a b c) 
      (format *standard-output* "found Three~%")
      (list a b c)))
 
 (peg:rules
-    new-grammar::X
+    test-grammar::X
     "'x'"
     (:lambda (s)
      (format *standard-output* "found X~%")
      s))
 
 (peg:rules 
-    new-grammar::Three-y
+    test-grammar::Three-y
     "Y Y Y"
   (:destructure (a b c)
    (format *standard-output* "found Three-y~%")
    (list a b c)))
 
 (peg:rules 
-    new-grammar::Y
+    test-grammar::Y
     "'y'"
   (:lambda (s)
    (format *standard-output* "found Y~%")
