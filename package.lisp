@@ -1,15 +1,15 @@
 (defpackage :peg
-  (:use :cl :esrap)
+  (:use :cl)
   (:export
    #:into-package
    #:rules
-   #:parse))
+   #:parser))
 
 (defpackage :PEG-GRAMMAR
-  (:use :cl :esrap)
+  (:use :cl)
   (:nicknames "PG")
   (:export
-   #:peg-grammar))
+   #:peg))
 
 (defpackage :new-grammar
   (:use :cl))
