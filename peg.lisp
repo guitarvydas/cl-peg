@@ -12,20 +12,11 @@
                (CL:AND PG::IDENTIFIER
                     PG::LEFTARROW
                     PG::EXPRESSION
-                    PG::SPACING
-                    (ESRAP:? PG::SEMANTICCODE))
+                    PG::SPACING)
   (:DESTRUCTURE
-   (ID ARR E SPC CODE)
+   (ID ARR E SPC)
    (CL:DECLARE (cl:IGNORE ARR SPC))
-   (cl:IF (cl:NULL CODE)
-       `(ESRAP:DEFRULE ,(cl:INTERN (cl:STRING-UPCASE ID) "NEW-GRAMMAR") ,E)
-     `(ESRAP:DEFRULE ,(cl:INTERN (cl:STRING-UPCASE ID) "NEW-GRAMMAR") ,E ,CODE))))
-
-(ESRAP:DEFRULE PG::SEMANTICCODE (CL:AND PG::OPENBRACE (esrap:+ PG::NOTBRACE) PG::CLOSEBRACE)
-  (:DESTRUCTURE
-   (LB CODE RB)
-   (CL:DECLARE (cl:IGNORE LB RB))
-   (cl:READ-FROM-STRING (esrap:TEXT CODE))))
+   `(ESRAP:DEFRULE ,(cl:INTERN (cl:STRING-UPCASE ID) "NEW-GRAMMAR") ,E)))
 
 (ESRAP:DEFRULE PG::NOTBRACE (CL:OR PG::UQLITERAL (CL:AND (ESRAP:! "}") esrap::CHARACTER))
   (:TEXT T)) ;; boolean
