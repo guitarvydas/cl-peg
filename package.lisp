@@ -3,6 +3,7 @@
   (:export
    #:into-package
    #:rule
+   #:multiple-rules
    #:parse
    #:peg-package
    ))

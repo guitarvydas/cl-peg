@@ -25,4 +25,5 @@ Parser API:
   <Body> is a single Lisp sexpr in the form accepted by ESRAP (see ESRAP documentation).  "Parser.lisp" shows the use
   of two kinds of ESRAP syntax, :destructure and :lambda.  The sexpr is invoked when a match is made.  The single
   argument to lambda is the list of all matching items (returned recursively "from below"). :Destructure allows one to
-  label each element of a return value.
+  label each element of a return value.  NB esrap:text is a helper function which collapses a list of characters,
+  and strings, into a single string.

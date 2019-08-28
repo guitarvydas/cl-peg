@@ -5,7 +5,10 @@
             "package"
             "peg"
             "macro"
-            "parser"
+            "parser2"
+            "parser3"
+            "parser4"
+            "parser5"
             "main"
             )
   :rules ((:compile :all (:requires (:load :previous)))))
