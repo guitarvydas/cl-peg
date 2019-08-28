@@ -1,6 +1,6 @@
 (ql:quickload "esrap")
 
-(defsystem peg-test (:optimize ((speed 0) (space 0) (safety 3) (debug 3)))
+(defsystem peg (:optimize ((speed 0) (space 0) (safety 3) (debug 3)))
   :members (
             "package"
             "peg"
