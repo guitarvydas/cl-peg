@@ -1,2 +1,2 @@
 (defun main ()
-  (peg:parser test-grammar::Top "xxxabcyyy"))
+  (peg:parse test-grammar::Top "xxxabcyyy"))

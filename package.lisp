@@ -2,9 +2,10 @@
   (:use :cl)
   (:export
    #:into-package
-   #:rules
-   #:parser
-   #:peg-package))
+   #:rule
+   #:parse
+   #:peg-package
+   ))
 
 (defpackage :PEG-GRAMMAR
   (:use :cl)

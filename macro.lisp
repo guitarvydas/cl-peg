@@ -14,7 +14,7 @@
 
 (defun peg-package () *peg-package*)
 
-(defmacro rules (id rulestr &body body)
+(defmacro rule (id rulestr &body body)
   "parse the rule to be added using the PEG grammar"
   ;; this results in an esrap sexpr that creates the new rule 
   ;; in the package *peg-package*
@@ -22,7 +22,7 @@
     `(esrap:defrule ,id ,esrap-syntax ,@body)))
 ;      `(esrap:defrule ,id ,esrap-syntax ,@body))))
 
-(defmacro parser (sym string-to-be-parsed)
+(defmacro parse (sym string-to-be-parsed)
   "rulenamestr is a string ; the starting rule"
   `(esrap:parse ',sym ,string-to-be-parsed))
 
