@@ -39,6 +39,7 @@
 
 (defmacro parse (sym string-to-be-parsed)
   "rulenamestr is a string ; the starting rule"
+  (assert (symbolp sym))  ;; dont quote the sym in peg:parse
   `(esrap:parse ',sym ,string-to-be-parsed))
 
 
