@@ -5,4 +5,5 @@
                         :pathname "./"
                         :components ((:file "package")
                                      (:file "peg")
-                                     (:file "macro")))))
+                                     (:file "macro")
+                                     (:file "simple-test")))))

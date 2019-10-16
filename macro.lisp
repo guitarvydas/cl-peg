@@ -24,6 +24,9 @@
   (let ((esrap-syntax (esrap:parse 'peg-grammar:peg rulestr)))
     `(esrap:defrule ,id ,esrap-syntax ,@body)))
 
+(defmacro fullpeg (rules-str)
+  `(esrap:parse 'PG:PEGGRAMMAR ,rules-str))
+
 (defmacro multiple-rules (&body body)
   "parse multiple PEG rules as triplets (name string body)"
   (let ((form nil))

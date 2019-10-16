@@ -1,5 +1,42 @@
 (IN-PACKAGE :peg-grammar)
 
+;; this part allows "full" peg grammar rules inside one peg:rule...
+
+(ESRAP:DEFRULE PG:PEGGRAMMAR (cl:AND pg::SPACING (+ pg::FULLDEFINITION) pg::SPACING pg::ENDOFFILE)
+  (:DESTRUCTURE
+   (SPC DEF SPC2 EOF)
+   (DECLARE (IGNORE SPC EOF SPC2))
+   `(PROGN ,@DEF)))
+
+(ESRAP:DEFRULE pg::FULLDEFINITION
+               (cl:AND pg::IDENTIFIER
+                    pg::LEFTARROW
+                    pg::EXPRESSION
+                    pg::SPACING
+                    (ESRAP:? pg::SEMANTICCODE))
+  (:DESTRUCTURE
+   (ID ARR E SPC CODE)
+   (DECLARE (IGNORE ARR SPC))
+   (IF (NULL CODE)
+       `(esrap:DEFRULE ,(cl:INTERN (cl:STRING-UPCASE ID) (peg:peg-package)) ,E)
+     `(esrap:DEFRULE ,(cl:INTERN (cl:STRING-UPCASE ID) (peg:peg-package)) ,E ,CODE))))
+
+(ESRAP:DEFRULE pg::SEMANTICCODE (cl:AND pg::OPENBRACE (+ pg::NOTBRACE) pg::CLOSEBRACE)
+  (:DESTRUCTURE
+   (LB CODE RB)
+   (DECLARE (IGNORE LB RB))
+   (READ-FROM-STRING (esrap:TEXT CODE))))
+
+(ESRAP:DEFRULE pg::NOTBRACE (OR pg::UQLITERAL (cl:AND (ESRAP:! "}") esrap::CHARACTER))
+  (:TEXT T))
+
+(esrap:defrule pg::openbrace "{")
+(esrap:defrule pg::closebrace "}")
+
+;; ^ addition for full-peg to here
+
+
+
 (ESRAP:DEFRULE PG:PEG (cl:AND PG::SPACING PG::DEFINITION PG::SPACING PG::ENDOFFILE)
   (:DESTRUCTURE
    (SPC DEF SPC2 EOF)
@@ -181,6 +218,11 @@
   (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) (cl:VALUES)))
 
 (ESRAP:DEFRULE PG::DOT (CL:AND "." PG::SPACING)
+  (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
+
+(ESRAP:DEFRULE PG::OPENBRACE (CL:AND "{" PG::SPACING)
+  (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
+(ESRAP:DEFRULE PG::CLOSEBRACE (CL:AND "}" PG::SPACING)
   (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
 
 (ESRAP:DEFRULE PG::SPACING (esrap:* (CL:OR PG::PSPACE PG::COMMENT))

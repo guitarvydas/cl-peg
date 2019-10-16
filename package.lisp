@@ -3,16 +3,18 @@
   (:export
    #:into-package
    #:rule
-   #:multiple-rules
    #:parse
    #:peg-package
+   #:fullpeg
    ))
 
 (defpackage :PEG-GRAMMAR
   (:use :cl)
   (:nicknames "PG")
   (:export
-   #:peg))
+   #:peg
+   #:peggrammar
+   ))
 
 (defpackage :test-grammar
   (:use :cl))
