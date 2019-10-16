@@ -27,3 +27,7 @@ Parser API:
   argument to lambda is the list of all matching items (returned recursively "from below"). :Destructure allows one to
   label each element of a return value.  NB esrap:text is a helper function which collapses a list of characters,
   and strings, into a single string.
+
+(peg:fullpeg <string of PEG definitions>)
+  Parses a full PEG grammar, including rule defs 'ident <- exprs' and including semantic rules written in lisp
+  (actually esrap) and enclosed in braces {...} after each rule def.
