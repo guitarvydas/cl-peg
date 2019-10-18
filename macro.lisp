@@ -6,14 +6,19 @@
 (defmacro @exit-when (expr) `(when ,expr (return)))
 
 (defmacro into-package (id)
-  `(cond ((stringp ,id)
-          (setf *peg-package* (find-package ,id)))
-         ((keywordp ,id)
-          (setf *peg-package* (find-package (symbol-name ,id))))
-         ((packagep ,id)
-          (setf *peg-package* ,id))
-         (t
-          (error "bad argument for peg:into-package, need string/keyword/package"))))
+  `(in-package
+    ,(cond ((stringp id)
+            (setf *peg-package* (find-package id))
+            id)
+           ((keywordp id)
+            (setf *peg-package* (find-package (symbol-name id)))
+            (symbol-name id))
+           ((packagep id)
+            (setf *peg-package* id)
+            (cl:package-name id))
+           (t
+            (error "bad argument for peg:into-package, need string/keyword/package")
+            id))))
 
 (defun peg-package () *peg-package*)
 

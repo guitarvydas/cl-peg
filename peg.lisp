@@ -17,9 +17,11 @@
   (:DESTRUCTURE
    (ID ARR E SPC CODE)
    (DECLARE (IGNORE ARR SPC))
-   (IF (NULL CODE)
-       `(esrap:DEFRULE ,(cl:INTERN (cl:STRING-UPCASE ID) (peg:peg-package)) ,E)
-     `(esrap:DEFRULE ,(cl:INTERN (cl:STRING-UPCASE ID) (peg:peg-package)) ,E ,CODE))))
+   (let ((sym (cl:INTERN (cl:STRING-UPCASE ID) (peg:peg-package))))
+     (format *error-output* "~&defining ~a::~a~%" (cl:package-name (peg:peg-package)) sym)
+     (IF (NULL CODE)
+         `(esrap:DEFRULE ,sym ,E)
+     `(esrap:DEFRULE ,sym ,E ,CODE)))))
 
 (ESRAP:DEFRULE pg::SEMANTICCODE (cl:AND pg::OPENBRACE (+ pg::NOTBRACE) pg::CLOSEBRACE)
   (:DESTRUCTURE
