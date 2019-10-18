@@ -3,5 +3,5 @@
 (defun delete-rules (pkg)
   "clear the rules of symbols in package pkg 
    relies on non-exported knowledge of esrap function delete-rule-cell"
-  (do-all-symbols (sym (find-package pkg))
+  (do-symbols (sym (find-package pkg))
     (esrap::delete-rule-cell sym)))
