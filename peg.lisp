@@ -1,6 +1,6 @@
 (IN-PACKAGE :peg-grammar)
 
-;; this part allows "full" peg grammar rules inside one peg:rule...
+;; this part allows "full" peg grammar rules inside one peg:fullpeg...
 
 (ESRAP:DEFRULE PG:PEGGRAMMAR (cl:AND pg::SPACING (+ pg::FULLDEFINITION) pg::SPACING pg::ENDOFFILE)
   (:DESTRUCTURE
@@ -30,8 +30,11 @@
 (ESRAP:DEFRULE pg::NOTBRACE (OR pg::UQLITERAL (cl:AND (ESRAP:! "}") esrap::CHARACTER))
   (:TEXT T))
 
-(esrap:defrule pg::openbrace "{")
-(esrap:defrule pg::closebrace "}")
+(ESRAP:DEFRULE PG::OPENBRACE (CL:AND "{" PG::SPACING)
+  (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
+(ESRAP:DEFRULE PG::CLOSEBRACE (CL:AND "}" PG::SPACING)
+  (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
+
 
 ;; ^ addition for full-peg to here
 
@@ -218,11 +221,6 @@
   (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) (cl:VALUES)))
 
 (ESRAP:DEFRULE PG::DOT (CL:AND "." PG::SPACING)
-  (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
-
-(ESRAP:DEFRULE PG::OPENBRACE (CL:AND "{" PG::SPACING)
-  (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
-(ESRAP:DEFRULE PG::CLOSEBRACE (CL:AND "}" PG::SPACING)
   (:LAMBDA (LIST) (CL:DECLARE (cl:IGNORE LIST)) 'esrap::CHARACTER))
 
 (ESRAP:DEFRULE PG::SPACING (esrap:* (CL:OR PG::PSPACE PG::COMMENT))

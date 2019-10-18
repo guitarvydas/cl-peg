@@ -6,6 +6,7 @@
    #:parse
    #:peg-package
    #:fullpeg
+   #:delete-rules
    ))
 
 (defpackage :PEG-GRAMMAR

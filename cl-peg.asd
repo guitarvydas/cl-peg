@@ -6,4 +6,5 @@
                         :components ((:file "package")
                                      (:file "peg")
                                      (:file "macro")
+                                     (:file "util")
                                      (:file "simple-test")))))
