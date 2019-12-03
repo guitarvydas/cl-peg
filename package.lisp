@@ -1,4 +1,4 @@
-(defpackage :peg
+(defpackage :cl-peg
   (:use :cl)
   (:export
    #:into-package

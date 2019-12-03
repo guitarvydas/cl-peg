@@ -1,6 +1,6 @@
 (IN-PACKAGE :peg-grammar)
 
-;; this part allows "full" peg grammar rules inside one peg:fullpeg...
+;; this part allows "full" peg grammar rules inside one cl-peg:fullpeg...
 
 (ESRAP:DEFRULE PG:PEGGRAMMAR (cl:AND pg::SPACING (+ pg::FULLDEFINITION) pg::SPACING pg::ENDOFFILE)
   (:DESTRUCTURE
@@ -17,8 +17,8 @@
   (:DESTRUCTURE
    (ID ARR E SPC CODE)
    (DECLARE (IGNORE ARR SPC))
-   (let ((sym (cl:INTERN (cl:STRING-UPCASE ID) (peg:peg-package))))
-     (format *error-output* "~&defining ~a::~a~%" (cl:package-name (peg:peg-package)) sym)
+   (let ((sym (cl:INTERN (cl:STRING-UPCASE ID) (cl-peg:peg-package))))
+     ;(format *error-output* "~&defining ~a::~a~%" (cl:package-name (cl-peg:peg-package)) sym)
      (IF (NULL CODE)
          `(esrap:DEFRULE ,sym ,E)
      `(esrap:DEFRULE ,sym ,E ,CODE)))))
@@ -87,7 +87,7 @@
   (:FUNCTION cl:SECOND))
 
 (ESRAP:DEFRULE PG::IDENTIFIER PG::STRINGIDENTIFIER
-  (:LAMBDA (X) (cl:INTERN (cl:STRING-UPCASE X) (peg:peg-package))))
+  (:LAMBDA (X) (cl:INTERN (cl:STRING-UPCASE X) (cl-peg:peg-package))))
 
 (ESRAP:DEFRULE PG::STRINGIDENTIFIER (CL:AND PG::IDENTSTART (esrap:* PG::IDENTCONT) PG::SPACING)
   (:TEXT T))

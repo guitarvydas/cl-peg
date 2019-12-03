@@ -1,0 +1,11 @@
+(cl-peg:into-package "TEST-GRAMMAR")
+
+(in-package :test-grammar)
+
+(defun not-bug ()
+  (let ((parsed (cl-peg:fullpeg
+                 "
+not-test <- !@ .
+")))
+    (eval parsed)    
+    (esrap:parse 'test-grammar::not-bug "a")))

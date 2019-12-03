@@ -1,4 +1,4 @@
-(in-package :peg)
+(in-package :cl-peg)
 
 (defparameter *peg-package* "TEST-GRAMMAR")
 
@@ -17,7 +17,7 @@
             (setf *peg-package* id)
             (cl:package-name id))
            (t
-            (error "bad argument for peg:into-package, need string/keyword/package")
+            (error "bad argument for cl-peg:into-package, need string/keyword/package")
             id))))
 
 (defun peg-package () *peg-package*)
@@ -47,7 +47,7 @@
 
 (defmacro parse (sym string-to-be-parsed)
   "rulenamestr is a string ; the starting rule"
-  (assert (symbolp sym))  ;; dont quote the sym in peg:parse
+  (assert (symbolp sym))  ;; dont quote the sym in cl-peg:parse
   `(esrap:parse ',sym ,string-to-be-parsed))
 
 

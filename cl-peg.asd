@@ -1,10 +1,18 @@
-(defsystem "cl-peg"
-  :depends-on ("esrap")
+(defsystem :cl-peg
+  :depends-on (:esrap)
   :components ((:module "source"
                         :serial t 
                         :pathname "./"
                         :components ((:file "package")
-                                     (:file "peg")
                                      (:file "macro")
-                                     (:file "util")
-                                     (:file "simple-test")))))
+                                     (:file "peg")
+                                     (:file "util")))))
+
+(defsystem "cl-peg/test"
+  :depends-on (:cl-peg)
+  :components ((:module "source"
+                        :serial t 
+                        :pathname "./"
+                        :components (
+				     (:file "simple-test")
+				     (:file "not-bug")))))

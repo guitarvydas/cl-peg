@@ -1,16 +1,16 @@
 (defun test1 ()
-  (peg:parse test-grammar::Top "xxxabcyyy"))
+  (cl-peg:parse test-grammar::Top "xxxabcyyy"))
 
 
 (defun test2 ()
-  (peg:parse test-grammar::Sexpr "(xxxabcyyy)"))
+  (cl-peg:parse test-grammar::Sexpr "(xxxabcyyy)"))
 
 
 (defun test4 ()
-  (peg:parse test-grammar::Sexpr4 "(xxxabcyyy)"))
+  (cl-peg:parse test-grammar::Sexpr4 "(xxxabcyyy)"))
 
 (defun test5 ()
-  (peg:parse test-grammar::Sexpr5 "(
+  (cl-peg:parse test-grammar::Sexpr5 "(
 xxxabcyyy
 )"))
 

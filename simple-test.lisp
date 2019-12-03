@@ -1,12 +1,12 @@
 (defpackage :test-grammar
   (:use :cl))
 
-(peg:into-package "TEST-GRAMMAR")
+(cl-peg:into-package "TEST-GRAMMAR")
 
 (in-package :test-grammar)
 
 (defun test ()
-  (let ((parsed (peg:fullpeg
+  (let ((parsed (cl-peg:fullpeg
                  "
 Expr <- Sum
 Sum <- Product (('+' / '-') Product)*
